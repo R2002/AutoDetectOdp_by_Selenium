@@ -37,6 +37,9 @@
   
 # ライセンス
 このプログラムはMITライセンスに準拠しています。  
-Copyright (c) 2021 R  
+Copyright (c) 2021 A-z. & R  
 Released under the MIT license  
 https://opensource.org/licenses/mit-license.php  
+  
+[特許実務の集約を目指す　from A to Z for IP](https://a2z4ip.hatenablog.com/)  
+[Rei-Farms](http://rei-farms.jp/)  
