@@ -85,7 +85,7 @@ def close_driver(browser):
 #---------------------------------------#
 # 関数設定（ダウンロード実施判定）
 #---------------------------------------#
-# 拒絶理由通知書リスト
+# OAリスト
 list_refusal = [
     # JP
 #     '拒絶理由通知書', # 英文のみ対象のため、日本語文書はコメントアウトしている
@@ -135,7 +135,7 @@ def access_ref(ref_title):
     print("◆%sにアクセスします。" % ref_title)
     browser.get('https://patentscope2.wipo.int/search/ja/search.jsf') # ブラウザでアクセス
 
-# 特許IDを探す
+# 特許No.を探す
 def search_ref_while(search_id):
     browser.get('https://patentscope2.wipo.int/search/ja/search.jsf')
     # 種類選択用
@@ -143,9 +143,9 @@ def search_ref_while(search_id):
     select_elem.click() # 対象を物理クリック
     select_list = Select(select_elem) # クリックしたい対象を選択するために準備
     select_list.select_by_value('ALLNUM') # ALLNUMを選択する
-    # IDを入力
+    # No.を入力
     browser.find_element_by_id('simpleSearchForm:fpSearch:input').clear() # 検索の入力フォームをクリア
-    browser.find_element_by_id('simpleSearchForm:fpSearch:input').send_keys(search_id) # 特許IDを入力
+    browser.find_element_by_id('simpleSearchForm:fpSearch:input').send_keys(search_id) # 特許No.を入力
     # 検索開始
     browser.find_element_by_id('simpleSearchForm:fpSearch:buttons').click() # 検索ボタンをクリック
 
@@ -159,14 +159,14 @@ def exchange_id(search_id):
 def search_ref(search_id):
     print("◆検索を行います。")
     # current_urlの読み込み
-    search_ref_while(search_id) # 自作関数で特許IDを探す
+    search_ref_while(search_id) # 自作関数で特許No.を探す
     current_url = browser.current_url
 
     # 読み込みエラーを通り抜ける
     i = 0
     while current_url == 'https://patentscope2.wipo.int/search/ja/expired.jsf': # このurlのままだと読み込みエラーだと判断する
         print("検索に再度アクセスします。")
-        search_ref_while(search_id_ch) # 自作関数で特許IDを探す
+        search_ref_while(search_id_ch) # 自作関数で特許No.を探す
         current_url = browser.current_url # ブラウザの現行URLを取得
         i += 1
         if i > 10:
@@ -355,7 +355,7 @@ def read_reach_data_documents(df_dict, key_head_name):
 #---------------------------------------#
 # 1. プログラム実行
 #---------------------------------------#
-# 特許ID入力
+# 特許No.入力
 print("WO番号を「XXXX-XXXXXX」（例：2016-031178）の形式で入力してください。")
 search_id = input()
 
